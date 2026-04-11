@@ -101,6 +101,7 @@ void AddFriendsPopup::select_player(cocos2d::CCObject* sender) {
         default: icon_type = IconType::Cube; id = 0; break;
     }
 
+    /*
     data.emplace_back(
         current_user_score->m_userName,
         current_user_score->m_accountID,
@@ -111,7 +112,18 @@ void AddFriendsPopup::select_player(cocos2d::CCObject* sender) {
         id,
         icon_type,
         current_user_score->m_glowEnabled
-    );
+    );*/
+    data.emplace_back(PlayerData {
+        current_user_score->m_userName,
+        current_user_score->m_accountID,
+        current_user_score->m_userID,
+        current_user_score->m_color1,
+        current_user_score->m_color2,
+        current_user_score->m_color3,
+        id,
+        icon_type,
+        current_user_score->m_glowEnabled
+    }); // ok android
     geode::Mod::get()->setSavedValue("users", data);
 
     this->onClose(nullptr);
