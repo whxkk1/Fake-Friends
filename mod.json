@@ -1,0 +1,32 @@
+{
+	"geode": "5.4.1",
+	"gd": {
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
+	},
+	"id": "whxkk_.fake-friends",
+	"name": "Fake Friends",
+	"version": "v1.0.0",
+	"developer": "whxkk_",
+	"description": "This mod allows you to have fake friends.",
+	"dependencies": {
+		"geode.node-ids": ">=v1.20.0"
+	},
+	"settings": {
+		"fake-friends-mode": {
+			"type": "string",
+			"name": "Fake Friends Mode",
+			"default": "Add fake friends to friend list",
+			"one-of": ["Disabled", "Add fake friends to friend list", "Show only fake friends"]
+		}
+	
+	},
+	"tags": [
+		"online"
+	],
+	"links": {
+		"source": "https://github.com/whxkk1/Fake-Friends"
+	}
+}
