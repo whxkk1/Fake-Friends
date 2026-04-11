@@ -2,7 +2,7 @@
 
 
 
-PlayerData::PlayerData(std::string& n, int acc, int user, int c1, int c2, int c3, int icon, IconType it, bool glow) 
+PlayerData::PlayerData(const std::string& n, int acc, int user, int c1, int c2, int c3, int icon, IconType it, bool glow) 
     : name(n),
     account_id(acc),
     user_id(user),

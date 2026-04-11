@@ -15,7 +15,7 @@ struct PlayerData {
 
     PlayerData() = default;
 
-    PlayerData(std::string& n, int acc, int user, int c1, int c2, int c3, int icon, IconType it, bool glow);
+    PlayerData(const std::string& n, int acc, int user, int c1, int c2, int c3, int icon, IconType it, bool glow);
     geode::Ref<GJUserScore> get_user_score();
 };
 
