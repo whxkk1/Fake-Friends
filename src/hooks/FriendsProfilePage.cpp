@@ -1,4 +1,4 @@
-#include <Geode/Modify/FriendsProfilePage.hpp>
+#include <Geode/modify/FriendsProfilePage.hpp>
 #include "../data/PlayerData.hpp"
 
 
