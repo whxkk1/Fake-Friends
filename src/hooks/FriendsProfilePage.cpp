@@ -26,7 +26,7 @@ void sort_names(cocos2d::CCArray* scores) {
     if(!scores) return;
     geode::cocos::CCArrayExt<GJUserScore*> scores_ext = scores;
     std::sort(scores_ext.begin(), scores_ext.end(), [](GJUserScore* a, GJUserScore* b) {
-        gd::string users[2] = {
+        std::string users[2] = {
             a->m_userName,
             b->m_userName,
         };
