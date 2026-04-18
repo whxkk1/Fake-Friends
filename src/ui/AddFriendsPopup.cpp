@@ -1,5 +1,6 @@
 #include "AddFriendsPopup.hpp"
 #include "../data/PlayerData.hpp"
+#include "../include.hpp"
 
 cocos2d::CCNode* AddFriendsPopup::create_player(IconType type) {
     int id = 0;
@@ -41,7 +42,7 @@ cocos2d::CCNode* AddFriendsPopup::create_player(IconType type) {
     return node;
 }
 
-bool AddFriendsPopup::init(GJUserScore* user, std::vector<PlayerData> player_data) {
+bool AddFriendsPopup::init(GJUserScore* user, std::shared_ptr<std::vector<PlayerData>> player_data, geode::WeakRef<CCMenuItemSpriteExtra> button_caller) {
     auto win_size = cocos2d::CCDirector::get()->getWinSize();
     popup_size = cocos2d::CCSize(win_size.width * 0.75f, win_size.height * 0.45f);
 
@@ -52,6 +53,7 @@ bool AddFriendsPopup::init(GJUserScore* user, std::vector<PlayerData> player_dat
 
     current_user_score = user;
     data = std::move(player_data);
+    button = button_caller;
 
     cocos2d::CCMenu* menu = cocos2d::CCMenu::create();
     menu->setContentSize(popup_size * 0.95);
@@ -75,9 +77,9 @@ bool AddFriendsPopup::init(GJUserScore* user, std::vector<PlayerData> player_dat
     return true;
 }
 
-AddFriendsPopup* AddFriendsPopup::create(GJUserScore* user, std::vector<PlayerData> player_data) {
+AddFriendsPopup* AddFriendsPopup::create(GJUserScore* user, std::shared_ptr<std::vector<PlayerData>> player_data, geode::WeakRef<CCMenuItemSpriteExtra> button_caller) {
     auto ret = new AddFriendsPopup();
-    if(ret->init(user, std::move(player_data))) {
+    if(ret->init(user, std::move(player_data), button_caller)) {
         ret->autorelease();
         return ret;
     }
@@ -113,7 +115,7 @@ void AddFriendsPopup::select_player(cocos2d::CCObject* sender) {
         icon_type,
         current_user_score->m_glowEnabled
     );*/
-    data.emplace_back(PlayerData {
+    data->emplace_back(PlayerData {
         current_user_score->m_userName,
         current_user_score->m_accountID,
         current_user_score->m_userID,
@@ -125,6 +127,15 @@ void AddFriendsPopup::select_player(cocos2d::CCObject* sender) {
         current_user_score->m_glowEnabled
     }); // ok android
     geode::Mod::get()->setSavedValue("users", data);
+    geode::Notification::create("User Added.", geode::NotificationIcon::Success)->show();
+
+    if(auto btn = button.lock()) {
+        cocos2d::CCSprite* remove_button_spr = cocos2d::CCSprite::createWithSpriteFrameName("RemoveFriend.png"_spr);
+        remove_button_spr->setScale(0.7f);
+        btn->setSprite(remove_button_spr);
+        btn->setTag(FakeFriends::REMOVE_BUTTON_TAG);
+        btn->updateSprite();
+    }
 
     this->onClose(nullptr);
 }

@@ -7,9 +7,10 @@ private:
     cocos2d::CCSize popup_size;
     cocos2d::CCNode* create_player(IconType type);
     void select_player(cocos2d::CCObject* sender);
-    std::vector<PlayerData> data;
+    std::shared_ptr<std::vector<PlayerData>> data;
+    geode::WeakRef<CCMenuItemSpriteExtra> button = nullptr;
 protected:
-    bool init(GJUserScore* user, std::vector<PlayerData> player_data);
+    bool init(GJUserScore* user, std::shared_ptr<std::vector<PlayerData>> player_data, geode::WeakRef<CCMenuItemSpriteExtra> button_caller);
 public:
-    static AddFriendsPopup* create(GJUserScore* user, std::vector<PlayerData> player_data);
+    static AddFriendsPopup* create(GJUserScore* user, std::shared_ptr<std::vector<PlayerData>> player_data, geode::WeakRef<CCMenuItemSpriteExtra> button_caller);
 };

@@ -14,6 +14,13 @@
 	"dependencies": {
 		"geode.node-ids": ">=v1.20.0"
 	},
+	"resources": {
+		"spritesheets": {
+			"Buttons": [
+				"resources/buttons/*.png"
+			]
+		}
+	},
 	"settings": {
 		"fake-friends-mode": {
 			"type": "string",
@@ -29,4 +36,5 @@
 	"links": {
 		"source": "https://github.com/whxkk1/Fake-Friends"
 	}
+	
 }
